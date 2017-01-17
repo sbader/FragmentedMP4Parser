@@ -127,7 +127,7 @@ class FragmentedMP4DescriptionTests: XCTestCase {
         XCTAssertEqual(iFrame3.byteRangeOffset, 993_902)
     }
 
-    let container: FragmentedMP4Description = {
+    lazy var container: FragmentedMP4Description = {
         let path = FragmentedMP4DescriptionTests.resourcePath(withFilename: "sample_video_fragmented.mp4")
         let parser = FragmentedMP4Parser(path: path)
 
