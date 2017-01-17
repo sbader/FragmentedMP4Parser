@@ -37,6 +37,12 @@ extension AudioSampleEntry: CustomStringConvertible {
 
 extension AudioSampleEntry: SampleDescriptionCodecStringConvertible {
     var codecString: String {
-        return "\(codingName).\(audioSpecificConfig.objectTypeString)"
+        var string = "\(codingName)"
+
+        if audioSpecificConfig.objectTypeString.characters.count > 0 {
+            string += ".\(audioSpecificConfig.objectTypeString)"
+        }
+
+        return string
     }
 }
