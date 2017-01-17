@@ -139,7 +139,7 @@ struct MP4DescriptorContainer {
 
         var fullCodecString = ""
         
-        fullCodecString += NSString(format: "%02X", decoderConfigurationDescriptor.objectTypeIndication) as String
+        fullCodecString += String(format: "%02X", decoderConfigurationDescriptor.objectTypeIndication)
 
         if let audioConfigString = decoderSpecificDescriptor?.audioConfigString {
             fullCodecString += ".\(audioConfigString)"

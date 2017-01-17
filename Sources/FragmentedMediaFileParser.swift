@@ -252,7 +252,7 @@ public class FragmentedMP4Parser {
     }
 
     func fragments(for mediaFile: MediaFileBox) throws -> [FragmentedMP4Description.Fragment] {
-        let fileURI = (path as NSString).lastPathComponent
+        let fileURI = NSString(string: path).lastPathComponent
 
         guard let movieBox = mediaFile.movieBox else {
             throw(Errors.parsingError)
@@ -483,7 +483,7 @@ public class FragmentedMP4Parser {
         }
 
 
-        let fileURI = (path as NSString).lastPathComponent
+        let fileURI = NSString(string: path).lastPathComponent
 
         let initializationInfo = FragmentedMP4Description.InitializationInfo(URI: fileURI,
                                                                         byteRangeSize: UInt(fileTypeBox.header.size + movieBox.header.size),

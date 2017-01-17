@@ -17,7 +17,7 @@ struct AVCDecoderConfigurationRecord {
     }
 
     var profileString: String {
-        return NSString(format: "%02X%02X%02X", profileIndication, profileCompatibility, levelIndication) as String
+        return String(format: "%02X%02X%02X", profileIndication, profileCompatibility, levelIndication)
     }
 }
 
