@@ -29,6 +29,16 @@ class FragmentedMP4DescriptionTests: XCTestCase {
         }
     }
 
+    func testDifferentParsing() {
+        let path = "/Volumes/Pullo/Sort/Conversion/Sneaky Pete - S01E01 - Pilot-converted.mp4"
+        let parser = FragmentedMP4Parser(path: path)
+
+        guard let _ = try? parser.parse() else {
+            XCTFail("Could not parse media file at \(path)")
+            return
+        }
+    }
+
     func testMediaInfo() {
         let mediaInfo = container.mediaInfo
         XCTAssertEqual(mediaInfo.peakBitRate, 701_988)
@@ -127,7 +137,7 @@ class FragmentedMP4DescriptionTests: XCTestCase {
         XCTAssertEqual(iFrame3.byteRangeOffset, 993_902)
     }
 
-    let container: FragmentedMP4Description = {
+    lazy var container: FragmentedMP4Description = {
         let path = FragmentedMP4DescriptionTests.resourcePath(withFilename: "sample_video_fragmented.mp4")
         let parser = FragmentedMP4Parser(path: path)
 

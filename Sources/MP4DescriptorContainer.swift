@@ -65,20 +65,23 @@ struct MP4DescriptorContainer {
 
     mutating func parseDescriptor() {
         let tagValue = buffer.readUInt8()
-        let size = buffer.readDescriptorSize()
-        let tag = MP4Descriptor.Tag(rawValue: tagValue)
 
-        if tag == .ESDescriptor {
-            parseESDescriptor(size: size)
-        }
-        else if tag == .DecoderConfigurationDescriptor {
-            parseDecoderConfigurationDescriptor(size: size)
-        }
-        else if tag == .DecoderSpecificDescriptor {
-            parseDecoderSpecificDescriptor(size: size)
-        }
-        else {
-            parseDefaultDescriptor(tag: tag!, size: size)
+        if buffer.size > 1 {
+            let size = buffer.readDescriptorSize()
+            let tag = MP4Descriptor.Tag(rawValue: tagValue)
+
+            if tag == .ESDescriptor {
+                parseESDescriptor(size: size)
+            }
+            else if tag == .DecoderConfigurationDescriptor {
+                parseDecoderConfigurationDescriptor(size: size)
+            }
+            else if tag == .DecoderSpecificDescriptor {
+                parseDecoderSpecificDescriptor(size: size)
+            }
+            else {
+                parseDefaultDescriptor(tag: tag!, size: size)
+            }
         }
     }
 
