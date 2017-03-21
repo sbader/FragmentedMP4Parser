@@ -5,7 +5,7 @@ struct VisualSampleEntry {
 
     var codingName: String { return header.type }
 
-    let avcDecoderConfiguration: AVCDecoderConfigurationRecord
+    let avcDecoderConfiguration: AVCDecoderConfigurationRecord?
 
     init(buffer: Buffer) {
         self.header = buffer.readBoxHeader()
@@ -27,7 +27,20 @@ struct VisualSampleEntry {
         buffer.advance(length: MemoryLayout<UInt16>.size)
         buffer.advance(length: MemoryLayout<Int16>.size)
 
-        self.avcDecoderConfiguration = AVCDecoderConfigurationRecord(buffer: buffer.readBufferToEnd())
+        var decoderConfiguration: AVCDecoderConfigurationRecord?
+
+        while buffer.hasMoreBytes {
+            let nextHeader = buffer.readBoxHeaderAndRewind()
+
+            if (nextHeader.type == "avcC") {
+                decoderConfiguration = AVCDecoderConfigurationRecord(buffer: buffer.readBufferToEnd())
+            }
+            else {
+                buffer.advance(length: nextHeader.size)
+            }
+        }
+
+        self.avcDecoderConfiguration = decoderConfiguration
     }
 }
 
@@ -39,6 +52,6 @@ extension VisualSampleEntry: CustomStringConvertible {
 
 extension VisualSampleEntry: SampleDescriptionCodecStringConvertible {
     var codecString: String {
-        return "\(codingName).\(avcDecoderConfiguration.profileString)"
+        return "\(codingName).\(avcDecoderConfiguration?.profileString ?? "nil")"
     }
 }
