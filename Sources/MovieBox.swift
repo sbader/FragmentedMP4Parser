@@ -44,6 +44,6 @@ struct MovieBox {
 
 extension MovieBox: CustomStringConvertible {
     var description: String {
-        return "MovieBox(header: \(header), movieHeaderBox: \(movieHeaderBox), trackBoxes: \(trackBoxes))"
+        return "MovieBox(header: \(header), movieHeaderBox: \(String(describing: movieHeaderBox)), trackBoxes: \(trackBoxes))"
     }
 }

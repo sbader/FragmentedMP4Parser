@@ -9,7 +9,7 @@ struct MediaFileBox {
 
 extension MediaFileBox: CustomStringConvertible {
     var description: String {
-        return "MediaFile(fileTypeBox: \(fileTypeBox), movieBox: \(movieBox), movieFragmentBoxes: \(movieFragmentBoxes))"
+        return "MediaFile(fileTypeBox: \(fileTypeBox?.description ?? ""), movieBox: \(movieBox?.description ?? ""), movieFragmentBoxes: \(movieFragmentBoxes))"
     }
 }
 

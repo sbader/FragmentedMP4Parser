@@ -76,6 +76,6 @@ struct TrackFragmentHeaderBox {
 
 extension TrackFragmentHeaderBox: CustomStringConvertible {
     var description: String {
-        return "TrackFragmentHeaderBox(header: \(header), version: \(version), flags: \(flags), trackID: \(trackID), baseDataOffset: \(baseDataOffset), sampleDescriptionIndex: \(sampleDescriptionIndex), defaultSampleDuration: \(defaultSampleDuration), defaultSampleSize: \(defaultSampleSize), defaultSampleFlags: \(defaultSampleFlags), durationIsEmpty: \(durationIsEmpty))"
+        return "TrackFragmentHeaderBox(header: \(header), version: \(version), flags: \(flags), trackID: \(trackID), baseDataOffset: \(baseDataOffset ?? 0), sampleDescriptionIndex: \(sampleDescriptionIndex ?? 0), defaultSampleDuration: \(defaultSampleDuration ?? 0), defaultSampleSize: \(defaultSampleSize ?? 0), defaultSampleFlags: \(defaultSampleFlags ?? 0), durationIsEmpty: \(durationIsEmpty))"
     }
 }

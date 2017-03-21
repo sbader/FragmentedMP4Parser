@@ -25,6 +25,6 @@ public struct IFrameSample {
 
 extension IFrameSample: CustomStringConvertible {
     public var description: String {
-        return "IFrameSample(byteRange: \(byteRange), timeOffsetInSeconds: \(timeOffsetInSeconds), duration: \(sample.duration), presentationDifferenceInSeconds: \(presentationDifferenceInSeconds))"
+        return "IFrameSample(byteRange: \(byteRange), timeOffsetInSeconds: \(timeOffsetInSeconds), duration: \(sample.duration ?? 0), presentationDifferenceInSeconds: \(presentationDifferenceInSeconds))"
     }
 }
