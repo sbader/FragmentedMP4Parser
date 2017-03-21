@@ -106,12 +106,12 @@ struct TrackRunBox {
 
 extension TrackRunBox: CustomStringConvertible {
     var description: String {
-        return "TrackRunBox(header: \(header), flags: \(flags), sampleCount: \(sampleCount), dataOffset: \(dataOffset), firstSampleFlags: \(firstSampleFlags), sampleDurationPresent: \(sampleDurationPresent), sampleSizePresent: \(sampleSizePresent), sampleFlagsPresent: \(sampleFlagsPresent), sampleCompositionTimeOffsetsPresent: \(sampleCompositionTimeOffsetsPresent))"
+        return "TrackRunBox(header: \(header), flags: \(flags), sampleCount: \(sampleCount), dataOffset: \(dataOffset ?? 0), firstSampleFlags: \(firstSampleFlags ?? 0), sampleDurationPresent: \(sampleDurationPresent), sampleSizePresent: \(sampleSizePresent), sampleFlagsPresent: \(sampleFlagsPresent), sampleCompositionTimeOffsetsPresent: \(sampleCompositionTimeOffsetsPresent))"
     }
 }
 
 extension TrackRunBox.SampleInfo: CustomStringConvertible {
     var description: String {
-        return "SampleInfo(duration: \(duration), size: \(size), flags: \(flags), compositionTimeOffset: \(compositionTimeOffset))"
+        return "SampleInfo(duration: \(duration ?? 0), size: \(size ?? 0), flags: \(flags ?? 0), compositionTimeOffset: \(compositionTimeOffset ?? 0))"
     }
 }

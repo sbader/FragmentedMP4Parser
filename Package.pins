@@ -1,0 +1,12 @@
+{
+  "autoPin": true,
+  "pins": [
+    {
+      "package": "FragmentedMP4Description",
+      "reason": null,
+      "repositoryURL": "/Users/sbader/Code/current/magic_box/Frameworks/FragmentedMP4Description",
+      "version": "0.0.1"
+    }
+  ],
+  "version": 1
+}
