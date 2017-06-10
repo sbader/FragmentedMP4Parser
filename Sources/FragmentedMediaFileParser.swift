@@ -544,9 +544,13 @@ public class FragmentedMP4Parser {
         var fragmentTotalDuration: Double = 0
         var fragmentPeakBitRate: Double = 0
 
+        var totalDuration: Double = 0
+
         for fragment in fragments {
             fragmentTotalSize += Double(fragment.byteRangeSize)
             fragmentTotalDuration += Double(fragment.durationInSeconds)
+
+            totalDuration += fragment.durationInSeconds
 
             let bitRate = 8.0 * (Double(fragment.byteRangeSize)/Double(fragment.durationInSeconds))
             if bitRate > fragmentPeakBitRate {
@@ -579,7 +583,8 @@ public class FragmentedMP4Parser {
                                                            audioCodec: audioCodec,
                                                            videoCodec: videoCodec,
                                                            resolution: resolution,
-                                                           peakFrameRate: peakFrameRateRounded)
+                                                           peakFrameRate: peakFrameRateRounded,
+                                                           duration: totalDuration)
 
         return FragmentedMP4Description(fileInfo: fileInfo,
                                         mediaInfo: mediaInfo,

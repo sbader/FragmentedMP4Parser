@@ -40,6 +40,7 @@ class FragmentedMP4DescriptionTests: XCTestCase {
         XCTAssertEqual(mediaInfo.resolution.width, 320)
         XCTAssertEqual(mediaInfo.resolution.height, 240)
         XCTAssertEqual(mediaInfo.peakFrameRate, 15.0)
+        XCTAssertEqual(round(mediaInfo.duration), 14.0)
     }
 
     func testFileInfo() {
