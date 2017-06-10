@@ -3,7 +3,7 @@
     "pins": [
       {
         "package": "FragmentedMP4Description",
-        "repositoryURL": "https://github.com/sbader/FragmentedMP4Description.git",
+        "repositoryURL": "git@github.com:sbader/FragmentedMP4Description.git",
         "state": {
           "branch": null,
           "revision": "2d0202cd90f3846a65aeeff8496062348cd80915",
