@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "FragmentedMP4Description",
+        "repositoryURL": "https://github.com/sbader/FragmentedMP4Description.git",
+        "state": {
+          "branch": null,
+          "revision": "2e4e80efbad33d732138b3e1cc2660a1dbbf801a",
+          "version": "0.0.2"
+        }
+      }
+    ]
+  },
+  "version": 1
+}
