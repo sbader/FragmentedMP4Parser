@@ -4,10 +4,20 @@ import FragmentedMP4Description
 
 @testable import FragmentedMP4Parser
 
-class FragmentedMP4DescriptionTests: XCTestCase {
+class FragmentedMP4ParserTests: XCTestCase {
+    static var allTests: [(String, (FragmentedMP4ParserTests) -> () -> Void)] = [
+      ("testSuccessfulParsing", testSuccessfulParsing),
+      ("testFailedParsing", testFailedParsing),
+      ("testMediaInfo", testMediaInfo),
+      ("testFileInfo", testFileInfo),
+      ("testInitializationInfo", testInitializationInfo),
+      ("testTracks", testTracks),
+      ("testFragments", testFragments),
+      ("testIFrames", testIFrames)
+    ]
 
     func testSuccessfulParsing() {
-        let path = FragmentedMP4DescriptionTests.resourcePath(withFilename: "sample_video_fragmented.mp4")
+        let path = FragmentedMP4ParserTests.resourcePath(withFilename: "sample_video_fragmented.mp4")
         let parser = FragmentedMP4Parser(path: path)
 
         guard let _ = try? parser.parse() else {
@@ -17,7 +27,7 @@ class FragmentedMP4DescriptionTests: XCTestCase {
     }
 
     func testFailedParsing() {
-        let path = FragmentedMP4DescriptionTests.resourcePath(withFilename: "sample_video_non_fragmented.mp4")
+        let path = FragmentedMP4ParserTests.resourcePath(withFilename: "sample_video_non_fragmented.mp4")
         let parser = FragmentedMP4Parser(path: path)
 
         XCTAssertThrowsError(try parser.parse()) { (error) in
@@ -129,7 +139,7 @@ class FragmentedMP4DescriptionTests: XCTestCase {
     }
 
     lazy var container: FragmentedMP4Description = {
-        let path = FragmentedMP4DescriptionTests.resourcePath(withFilename: "sample_video_fragmented.mp4")
+        let path = FragmentedMP4ParserTests.resourcePath(withFilename: "sample_video_fragmented.mp4")
         let parser = FragmentedMP4Parser(path: path)
 
         return try! parser.parse()
