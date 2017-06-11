@@ -21,8 +21,8 @@ public class FragmentedMP4Parser {
 
     lazy var fileSize: Int = {
         if let attributes = try? FileManager.default.attributesOfItem(atPath: self.path),
-            let fileSizeAttribute = attributes[FileAttributeKey.size] as? Int {
-            return fileSizeAttribute
+            let fileSizeAttribute = attributes[FileAttributeKey.size] as? NSNumber {
+            return fileSizeAttribute.intValue
         }
 
         return 0
