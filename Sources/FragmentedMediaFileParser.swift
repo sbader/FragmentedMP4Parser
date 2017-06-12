@@ -143,7 +143,7 @@ public class FragmentedMP4Parser {
             let mediaDataInfo = mediaFile.mediaDataBoxesInfo[i]
 
             guard let trackFragmentBox = fragmentBox.trackFragmentBox(withID: videoTrack.trackHeaderBox.trackID) else {
-                throw(Errors.parsingError)
+                continue
             }
 
             guard let track = tracksByID[UInt(trackFragmentBox.trackFragmentHeaderBox.trackID)] else {
@@ -294,7 +294,7 @@ public class FragmentedMP4Parser {
             let mediaDataInfo = mediaFile.mediaDataBoxesInfo[i]
 
             guard let trackFragmentBox = fragmentBox.trackFragmentBox(withID: videoTrack.trackHeaderBox.trackID) else {
-                throw(Errors.parsingError)
+                continue
             }
 
             guard let track = tracksByID[UInt(trackFragmentBox.trackFragmentHeaderBox.trackID)] else {
@@ -397,7 +397,7 @@ public class FragmentedMP4Parser {
 
         for fragmentBox in mediaFile.movieFragmentBoxes {
             guard let trackFragmentBox = fragmentBox.trackFragmentBox(withID: videoTrack.trackHeaderBox.trackID) else {
-                throw(Errors.parsingError)
+                continue
             }
 
             guard let track = tracksByID[UInt(trackFragmentBox.trackFragmentHeaderBox.trackID)] else {
