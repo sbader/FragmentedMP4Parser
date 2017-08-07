@@ -9,7 +9,7 @@ struct AudioSampleEntry {
     let sampleSize: UInt16
     let sampleRate: UInt32
 
-    let audioSpecificConfig: AudioSpecificConfig
+    let audioSpecificConfig: AudioSpecificConfig?
 
     init(buffer: Buffer) {
         self.header = buffer.readBoxHeader()
@@ -25,19 +25,29 @@ struct AudioSampleEntry {
         buffer.advance(length: MemoryLayout<UInt16>.size)
 
         self.sampleRate = buffer.readUInt32BigEndian()
-        self.audioSpecificConfig = AudioSpecificConfig(buffer: buffer.readBufferToEnd())
+
+        if buffer.hasMoreBytes {
+            self.audioSpecificConfig = AudioSpecificConfig(buffer: buffer.readBufferToEnd())
+        }
+        else {
+            self.audioSpecificConfig = nil
+        }
     }
 }
 
 extension AudioSampleEntry: CustomStringConvertible {
     var description: String {
-        return "AudioSampleEntry(header: \(header), channelCount: \(channelCount), sampleSize: \(sampleSize), sampleRate: \(sampleRate), audioSpecificConfig: \(audioSpecificConfig))"
+        return "AudioSampleEntry(header: \(header), channelCount: \(channelCount), sampleSize: \(sampleSize), sampleRate: \(sampleRate), audioSpecificConfig: \(String(describing: audioSpecificConfig)))"
     }
 }
 
 extension AudioSampleEntry: SampleDescriptionCodecStringConvertible {
     var codecString: String {
         var string = "\(codingName)"
+
+        guard let audioSpecificConfig = audioSpecificConfig else {
+            return string
+        }
 
         if audioSpecificConfig.objectTypeString.characters.count > 0 {
             string += ".\(audioSpecificConfig.objectTypeString)"
