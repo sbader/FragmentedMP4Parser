@@ -12,7 +12,8 @@ struct AudioSampleEntry {
     let audioSpecificConfig: AudioSpecificConfig?
 
     init(buffer: Buffer) {
-        self.header = buffer.readBoxHeader()
+        let boxHeader = buffer.readBoxHeader()
+        self.header = boxHeader
 
         buffer.advance(length: MemoryLayout<UInt8>.size * 6)
         buffer.advance(length: MemoryLayout<UInt16>.size)
@@ -26,7 +27,7 @@ struct AudioSampleEntry {
 
         self.sampleRate = buffer.readUInt32BigEndian()
 
-        if buffer.hasMoreBytes {
+        if buffer.hasMoreBytes && boxHeader.type == "aac" {
             self.audioSpecificConfig = AudioSpecificConfig(buffer: buffer.readBufferToEnd())
         }
         else {
