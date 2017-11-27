@@ -26,13 +26,15 @@ struct AudioSampleEntry {
         buffer.advance(length: MemoryLayout<UInt16>.size)
 
         self.sampleRate = buffer.readUInt32BigEndian()
+        
+        self.audioSpecificConfig = AudioSpecificConfig(buffer: buffer.readBufferToEnd())
 
-        if buffer.hasMoreBytes && boxHeader.type == "aac" {
-            self.audioSpecificConfig = AudioSpecificConfig(buffer: buffer.readBufferToEnd())
-        }
-        else {
-            self.audioSpecificConfig = nil
-        }
+//        if buffer.hasMoreBytes && boxHeader.type == "aac" {
+//            self.audioSpecificConfig = AudioSpecificConfig(buffer: buffer.readBufferToEnd())
+//        }
+//        else {
+//            self.audioSpecificConfig = nil
+//        }
     }
 }
 

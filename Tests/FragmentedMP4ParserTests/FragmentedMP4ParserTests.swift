@@ -26,6 +26,23 @@ class FragmentedMP4ParserTests: XCTestCase {
         }
     }
 
+    func testSuccessfulHEVCParsing() {
+        let path = FragmentedMP4ParserTests.resourcePath(withFilename: "sample_video_fragmented_hevc.mp4")
+        let parser = FragmentedMP4Parser(path: path)
+
+        do {
+            _ = try parser.parse()
+        }
+        catch let e {
+            XCTFail("Could not parse media file at \(path), \(e)")
+        }
+
+//        guard let _ = try? parser.parse() else {
+//            XCTFail("Could not parse media file at \(path)")
+//            return
+//        }
+    }
+
     func testFailedParsing() {
         let path = FragmentedMP4ParserTests.resourcePath(withFilename: "sample_video_non_fragmented.mp4")
         let parser = FragmentedMP4Parser(path: path)
@@ -47,6 +64,16 @@ class FragmentedMP4ParserTests: XCTestCase {
         XCTAssertEqual(mediaInfo.iFrameAverageBitRate, 31_348)
         XCTAssertEqual(mediaInfo.audioCodec, "mp4a.40.2")
         XCTAssertEqual(mediaInfo.videoCodec, "avc1.4D400D")
+        XCTAssertEqual(mediaInfo.resolution.width, 320)
+        XCTAssertEqual(mediaInfo.resolution.height, 240)
+        XCTAssertEqual(mediaInfo.peakFrameRate, 15.0)
+        XCTAssertEqual(round(mediaInfo.duration), 14.0)
+    }
+
+    func testHEVCMediaInfo() {
+        let mediaInfo = hevcContainer.mediaInfo
+        XCTAssertEqual(mediaInfo.audioCodec, "mp4a.40.2")
+        XCTAssertEqual(mediaInfo.videoCodec, "hev1.1.60000000.L60.90")
         XCTAssertEqual(mediaInfo.resolution.width, 320)
         XCTAssertEqual(mediaInfo.resolution.height, 240)
         XCTAssertEqual(mediaInfo.peakFrameRate, 15.0)
@@ -140,6 +167,13 @@ class FragmentedMP4ParserTests: XCTestCase {
 
     lazy var container: FragmentedMP4Description = {
         let path = FragmentedMP4ParserTests.resourcePath(withFilename: "sample_video_fragmented.mp4")
+        let parser = FragmentedMP4Parser(path: path)
+
+        return try! parser.parse()
+    }()
+
+    lazy var hevcContainer: FragmentedMP4Description = {
+        let path = FragmentedMP4ParserTests.resourcePath(withFilename: "sample_video_fragmented_hevc.mp4")
         let parser = FragmentedMP4Parser(path: path)
 
         return try! parser.parse()
