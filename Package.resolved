@@ -3,11 +3,11 @@
     "pins": [
       {
         "package": "FragmentedMP4Description",
-        "repositoryURL": "git@github.com:sbader/FragmentedMP4Description.git",
+        "repositoryURL": "/Users/sbader/Code/current/magic_box/Pristine/FragmentedMP4Description",
         "state": {
-          "branch": null,
-          "revision": "2d0202cd90f3846a65aeeff8496062348cd80915",
-          "version": "0.0.4"
+          "branch": "master",
+          "revision": "badaa24581114414583f66bca7fd85d7702a16ff",
+          "version": null
         }
       }
     ]
