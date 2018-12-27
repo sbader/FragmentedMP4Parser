@@ -52,7 +52,7 @@ extension AudioSampleEntry: SampleDescriptionCodecStringConvertible {
             return string
         }
 
-        if audioSpecificConfig.objectTypeString.characters.count > 0 {
+        if audioSpecificConfig.objectTypeString.count > 0 {
             string += ".\(audioSpecificConfig.objectTypeString)"
         }
 
