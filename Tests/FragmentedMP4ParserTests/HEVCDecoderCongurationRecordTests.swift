@@ -37,7 +37,7 @@ class HEVCDecoderConfigurationRecordTests: XCTestCase {
     func testSuccessfulParsing() {
         let record = HEVCDecoderConfigurationRecord(buffer: buffer)
 
-        XCTAssertEqual(record.profileString, "2.4.L63.90")
+        XCTAssertEqual(record.profileString, "2.4000000.L63.90")
     }
 }
 
